@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Open Graph",
+  "description": "Preview Open Graph meta tags of a website",
+  "version": "1.0.0",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_icon": "open-graph-icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "type": "module",
+    "service_worker": "service_worker.js"
+  }
+}
