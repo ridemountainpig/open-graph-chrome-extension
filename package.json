@@ -13,7 +13,7 @@
   "author": "Ridemountainpig",
   "license": "MIT",
   "dependencies": {
-    "lucide-react": "^0.307.0",
+    "lucide-react": "^0.363.0",
     "node-html-parser": "^6.1.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { parseOpenGraph } from "./open-graph";
 import "./popup.css";
 import { OpenGraph } from "./type";
-import { ArrowRight, Image, MoveLeft } from "lucide-react";
+import { ArrowRight, LoaderCircle, Image, MoveLeft } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { TitleContent } from "./components/title-content";
 import { TitleLink } from "./components/title-link";
@@ -13,6 +13,7 @@ const Popup = () => {
   const [url, setUrl] = useState("");
   const [imgLoadState, setImgLoadState] = useState(true);
   const [OpenGraph, setOpenGraph] = useState({} as OpenGraph);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
@@ -28,6 +29,8 @@ const Popup = () => {
       return;
     }
 
+    setLoading(true);
+
     const fullUrl =
       url.startsWith("http://") || url.startsWith("https://")
         ? url
@@ -38,9 +41,7 @@ const Popup = () => {
       if (res.ok) {
         const text = await res.text();
         if (text == "") {
-          toast.error(
-            `Invalid URL\nCheck the URL and try again`
-          );
+          toast.error(`Invalid URL\nCheck the URL and try again`);
           setOpenGraph({} as OpenGraph);
           return;
         }
@@ -52,11 +53,13 @@ const Popup = () => {
         );
         setOpenGraph({} as OpenGraph);
       }
+      setLoading(false);
     } catch (error) {
       toast.error(
         "Can't get open graph information\nPlease check the url and try again."
       );
       setOpenGraph({} as OpenGraph);
+      setLoading(false);
     }
   };
 
@@ -97,7 +100,13 @@ const Popup = () => {
                   className="flex h-14 w-20 items-center justify-center rounded-2xl bg-zumthor-400"
                   onClick={handleButtonClick}
                 >
-                  <ArrowRight color="#665c5c" />
+                  {loading ? (
+                    <div className="animate-spin">
+                      <LoaderCircle color="#665c5c" />
+                    </div>
+                  ) : (
+                    <ArrowRight color="#665c5c" />
+                  )}
                 </button>
               </div>
             </div>
