@@ -20,10 +20,9 @@ No additional setup is required for this extension. Simply enter a URL to fetch 
 
 ## Open Graph Raycast Extension
 
-| | Extension      | Description                                        | Created by                                | Link                                                                            |
-| ---- | -------------- | -------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
-| <img src="https://github.com/pheralb/svgl/blob/main/static/library/raycast.svg" height="25" /> | Open Graph for Raycast | Preview Open Graph meta tags of a website.          | [davidho](https://github.com/davidho0403) | [Raycast Store](https://www.raycast.com/davidho0403/open-graph) |
-
+|                                                                                                | Extension              | Description                                | Created by                          | Link                                                       |
+| ---------------------------------------------------------------------------------------------- | ---------------------- | ------------------------------------------ | ----------------------------------- | ---------------------------------------------------------- |
+| <img src="https://github.com/pheralb/svgl/blob/main/static/library/raycast.svg" height="25" /> | Open Graph for Raycast | Preview Open Graph meta tags of a website. | [1weiho](https://github.com/1weiho) | [Raycast Store](https://www.raycast.com/1weiho/open-graph) |
 
 ## Screenshots:
 
