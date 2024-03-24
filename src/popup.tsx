@@ -24,6 +24,10 @@ const Popup = () => {
   };
 
   const handleButtonClick = async () => {
+    if (loading) {
+      return;
+    }
+
     if (url === "") {
       toast.error("Please Enter URL");
       return;
@@ -37,19 +41,28 @@ const Popup = () => {
         : `https://${url}`;
 
     try {
-      const res = await fetch("https://og-api.zeabur.app/url?url=" + fullUrl);
-      if (res.ok) {
-        const text = await res.text();
-        if (text == "") {
-          toast.error(`Invalid URL\nCheck the URL and try again`);
-          setOpenGraph({} as OpenGraph);
-          return;
+      const country = ["jp", "us", "gm", "hk"];
+      let resSuccess = false;
+      for (let i = 0; i < country.length; i++) {
+        const res = await fetch(
+          `https://og-api-${country[i]}.zeabur.app/url?url=${fullUrl}`
+        );
+        if (res.ok) {
+          const text = await res.text();
+          if (text == "") {
+            toast.error(`Invalid URL\nCheck the URL and try again`);
+            setOpenGraph({} as OpenGraph);
+          }
+          const openGraph = parseOpenGraph(text);
+          setOpenGraph(openGraph);
+          resSuccess = true;
+          break;
         }
-        const openGraph = parseOpenGraph(text);
-        setOpenGraph(openGraph);
-      } else {
+      }
+
+      if (!resSuccess) {
         toast.error(
-          `Loading Failed\nError ${res.status}: Check the URL and try again`
+          `Can't get open graph information\nPlease check the url and try again.`
         );
         setOpenGraph({} as OpenGraph);
       }
