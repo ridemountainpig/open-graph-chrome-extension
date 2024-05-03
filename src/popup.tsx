@@ -40,6 +40,14 @@ const Popup = () => {
         ? url
         : `https://${url}`;
 
+    const imageUrl = (url: string) => {
+      const img = url;
+      if (img === null || img.startsWith("http")) return img;
+      if (!img.startsWith("/")) return new URL(img, fullUrl).toString();
+      const domain = new URL(fullUrl).origin;
+      return `${domain}${img}`;
+    };
+
     try {
       const country = ["jp", "us", "gm", "hk"];
       let resSuccess = false;
@@ -54,6 +62,12 @@ const Popup = () => {
             setOpenGraph({} as OpenGraph);
           }
           const openGraph = parseOpenGraph(text);
+          if (openGraph.og.image != "none") {
+            openGraph.og.image = imageUrl(openGraph.og.image);
+          }
+          if (openGraph.twitter.image != "none") {
+            openGraph.twitter.image = imageUrl(openGraph.twitter.image);
+          }
           setOpenGraph(openGraph);
           resSuccess = true;
           break;
@@ -134,7 +148,7 @@ const Popup = () => {
                 <MoveLeft size={18} strokeWidth={2.25} />
               </button>
             </div>
-            <div className="grid grid-cols-5 h-full">
+            <div className="grid grid-cols-5 h-full w-full">
               <div className="col-span-3 h-full overflow-y-auto p-2">
                 {(OpenGraph.og.image != "none" ||
                   OpenGraph.twitter.image != "none") &&
