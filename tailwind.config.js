@@ -71,6 +71,10 @@ export default {
       },
       "text-black": "#666666",
     },
+    fontSize: {
+      "2xs": ".625rem",
+      "3xs": ".5rem",
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };

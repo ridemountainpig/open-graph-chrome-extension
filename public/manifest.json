@@ -14,5 +14,6 @@
   "background": {
     "type": "module",
     "service_worker": "service_worker.js"
-  }
+  },
+  "permissions": ["activeTab"]
 }
