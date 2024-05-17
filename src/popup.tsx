@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { parseOpenGraph } from "./open-graph";
 import "./popup.css";
 import { OpenGraph } from "./type";
-import { ArrowRight, LoaderCircle, Image, MoveLeft, X } from "lucide-react";
+import { ArrowRight, LoaderCircle, MoveLeft, X } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { TitleContent } from "./components/title-content";
 import { TitleLink } from "./components/title-link";
 import { SplitLine } from "./components/split-line";
+import { OGImage } from "./components/og-image";
 
 const Popup = () => {
   const [url, setUrl] = useState("");
-  const [imgLoadState, setImgLoadState] = useState(true);
   const [OpenGraph, setOpenGraph] = useState({} as OpenGraph);
   const [loading, setLoading] = useState(false);
 
@@ -196,7 +196,7 @@ const Popup = () => {
           <div className="flex h-full w-full items-center justify-center relative">
             <div className="absolute top-2 left-2">
               <button
-                className="p-3 rounded-xl bg-zumthor-400 opacity-60"
+                className="p-3 rounded-xl bg-zumthor-400 opacity-60 hover:opacity-80"
                 onClick={handleBackButtonClick}
               >
                 <MoveLeft size={18} strokeWidth={2.25} />
@@ -204,44 +204,7 @@ const Popup = () => {
             </div>
             <div className="grid grid-cols-5 h-full w-full">
               <div className="col-span-3 h-full overflow-y-auto p-2">
-                {(OpenGraph.og.image != "none" ||
-                  OpenGraph.twitter.image != "none") &&
-                imgLoadState ? (
-                  OpenGraph.og.image ? (
-                    <img
-                      src={OpenGraph.og.image}
-                      alt={OpenGraph.title + " image"}
-                      className="rounded-xl"
-                      onError={() => {
-                        setImgLoadState(false);
-                      }}
-                    />
-                  ) : (
-                    <img
-                      src={OpenGraph.twitter.image}
-                      alt={OpenGraph.title + " image"}
-                      className="rounded-xl"
-                      onError={() => {
-                        setImgLoadState(false);
-                      }}
-                    />
-                  )
-                ) : (
-                  <div className="w-full h-[50%] flex justify-center items-center">
-                    <div>
-                      <div className="w-full flex justify-center">
-                        <Image size={64} color="#000000" />
-                      </div>
-                      <div className="w-full flex justify-center">
-                        <div className="font-monofont-sans text-xs font-medium tracking-wider text-black w-fit mt-2 p-3 rounded-xl bg-zumthor-400 opacity-60">
-                          {imgLoadState == false
-                            ? "Failed to load image"
-                            : "No Image"}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                <OGImage OpenGraph={OpenGraph} />
                 <div className="font-monofont-sans text-base font-semibold tracking-wider text-text-black mt-2 p-3 rounded-xl bg-zumthor-400 bg-opacity-60">
                   {OpenGraph.title}
                 </div>
