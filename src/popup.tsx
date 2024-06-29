@@ -84,28 +84,22 @@ const Popup = () => {
           resSuccess = true;
         }
       } else {
-        const country = ["us", "jp", "gm", "hk"];
-        for (let i = 0; i < country.length; i++) {
-          const res = await fetch(
-            `https://og-api-${country[i]}.zeabur.app/url?url=${fullUrl}`
-          );
-          if (res.ok) {
-            const text = await res.text();
-            if (text == "") {
-              toast.error(`Invalid URL\nCheck the URL and try again`);
-              setOpenGraph({} as OpenGraph);
-            }
-            const openGraph = parseOpenGraph(text);
-            if (openGraph.og.image != "none") {
-              openGraph.og.image = imageUrl(openGraph.og.image);
-            }
-            if (openGraph.twitter.image != "none") {
-              openGraph.twitter.image = imageUrl(openGraph.twitter.image);
-            }
-            setOpenGraph(openGraph);
-            resSuccess = true;
-            break;
+        const res = await fetch(`https://og-api.zeabur.app/url?url=${fullUrl}`);
+        if (res.ok) {
+          const text = await res.text();
+          if (text == "") {
+            toast.error(`Invalid URL\nCheck the URL and try again`);
+            setOpenGraph({} as OpenGraph);
           }
+          const openGraph = parseOpenGraph(text);
+          if (openGraph.og.image != "none") {
+            openGraph.og.image = imageUrl(openGraph.og.image);
+          }
+          if (openGraph.twitter.image != "none") {
+            openGraph.twitter.image = imageUrl(openGraph.twitter.image);
+          }
+          setOpenGraph(openGraph);
+          resSuccess = true;
         }
       }
 
