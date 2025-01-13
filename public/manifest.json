@@ -2,13 +2,22 @@
   "manifest_version": 3,
   "name": "Open Graph",
   "description": "Preview Open Graph meta tags of a website",
+  "icons": {
+    "16": "open-graph-icon-16.png",
+    "48": "open-graph-icon-48.png",
+    "128": "open-graph-icon-128.png"
+  },
   "version": "1.0.2",
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
   },
   "action": {
-    "default_icon": "open-graph-icon.png",
+    "default_icon": {
+      "16": "open-graph-icon-16.png",
+      "48": "open-graph-icon-48.png",
+      "128": "open-graph-icon-128.png"
+    },
     "default_popup": "popup.html"
   },
   "background": {
