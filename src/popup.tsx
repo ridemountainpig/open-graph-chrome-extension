@@ -84,7 +84,7 @@ const Popup = () => {
           resSuccess = true;
         }
       } else {
-        const res = await fetch(`https://og-api.zeabur.app/url?url=${fullUrl}`);
+        const res = await fetch(`https://og-api.yencheng.dev/url?url=${fullUrl}`);
         if (res.ok) {
           const text = await res.text();
           if (text == "") {
